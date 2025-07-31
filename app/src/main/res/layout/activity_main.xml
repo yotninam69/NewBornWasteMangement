@@ -1,103 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    tools:context=".MainActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <!-- Top Bar: Title on Left, Logo on Right -->
-    <LinearLayout
-        android:id="@+id/topBar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:background="@android:color/holo_red_dark"
-        android:gravity="center_vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+    <!-- Main content with toolbar and fragments -->
+    <include
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/app_bar_main" />
 
-        <TextView
-            android:id="@+id/titleText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Waste Management"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/white" />
+    <!-- Navigation drawer menu -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" />
 
-        <ImageView
-            android:id="@+id/logoImage"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/environtment"
-            android:contentDescription="App Logo" />
-    </LinearLayout>
-
-    <!-- Map Placeholder -->
-    <ImageView
-        android:id="@+id/mapImage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/map"
-        app:layout_constraintTop_toBottomOf="@id/topBar"
-        app:layout_constraintBottom_toTopOf="@id/footerScroll"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="8dp" />
-
-    <!-- Scrollable Footer for Multiple Trashcans -->
-    <ScrollView
-        android:id="@+id/footerScroll"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fillViewport="true"
-        android:background="#EFEFEF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:id="@+id/footer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:gravity="center_horizontal">
-
-            <!-- Trashcan A -->
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Trashcan A" android:textStyle="bold" />
-            <ProgressBar android:layout_width="200dp" android:layout_height="wrap_content" android:progress="85" android:max="100" style="@android:style/Widget.ProgressBar.Horizontal" android:progressTint="@android:color/holo_green_dark" />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="85%" android:layout_marginBottom="12dp" />
-
-            <!-- Trashcan B -->
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Trashcan B" android:textStyle="bold" />
-            <ProgressBar android:layout_width="200dp" android:layout_height="wrap_content" android:progress="60" android:max="100" style="@android:style/Widget.ProgressBar.Horizontal" android:progressTint="@android:color/holo_orange_light" />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="60%" android:layout_marginBottom="12dp" />
-
-            <!-- Trashcan C -->
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Trashcan C" android:textStyle="bold" />
-            <ProgressBar android:layout_width="200dp" android:layout_height="wrap_content" android:progress="40" android:max="100" style="@android:style/Widget.ProgressBar.Horizontal" android:progressTint="@android:color/holo_orange_dark" />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="40%" android:layout_marginBottom="12dp" />
-
-            <!-- Trashcan D -->
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Trashcan D" android:textStyle="bold" />
-            <ProgressBar android:layout_width="200dp" android:layout_height="wrap_content" android:progress="15" android:max="100" style="@android:style/Widget.ProgressBar.Horizontal" android:progressTint="@android:color/holo_red_dark" />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="15%" android:layout_marginBottom="12dp" />
-
-            <!-- Trashcan E -->
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Trashcan E" android:textStyle="bold" />
-            <ProgressBar android:layout_width="200dp" android:layout_height="wrap_content" android:progress="100" android:max="100" style="@android:style/Widget.ProgressBar.Horizontal" android:progressTint="@android:color/holo_green_dark" />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="100%" android:layout_marginBottom="12dp" />
-
-        </LinearLayout>
-    </ScrollView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
