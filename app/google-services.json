@@ -12,7 +12,20 @@
           "package_name": "com.example.wastemanagement"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1048561080135-kn38bj4i4s47fq1m0nfv7n7q7pne7rot.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wastemanagement",
+            "certificate_hash": "f78748bddf46a5a97e39eaf1fe2bc2165b6b28db"
+          }
+        },
+        {
+          "client_id": "1048561080135-cn9e9tc7s224ednsdhf43ei38q3hrh4j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDgE4yucH-Nx1ieey61XYzjJapIjD35_Ps"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1048561080135-cn9e9tc7s224ednsdhf43ei38q3hrh4j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
