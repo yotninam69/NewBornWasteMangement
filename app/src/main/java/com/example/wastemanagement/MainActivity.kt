@@ -1,10 +1,12 @@
 package com.example.wastemanagement
 
+import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
@@ -14,11 +16,15 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var drawerLayout: DrawerLayout
     private var doubleBackToExitPressedOnce = false
+
+    private lateinit var weightText: TextView
+    private lateinit var dbRef: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +45,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 } else {
                     doubleBackToExit()
                 }
+            }
+        })
+
+        weightText = findViewById(R.id.weightText)
+
+        // 🔹 Reference directly to "weights" node
+        dbRef = FirebaseDatabase.getInstance().getReference("weights")
+
+        // 🔹 Listen for latest data (assumes Pico uses PUT, not POST)
+        dbRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val weight = snapshot.child("weight").getValue(Double::class.java)
+                    val unit = snapshot.child("unit").getValue(String::class.java) ?: "g"
+                    if (weight != null) {
+                        weightText.text = "Weight: $weight $unit"
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@MainActivity, "Database error: ${error.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
